@@ -314,11 +314,15 @@ def load_model():
     global model
 
     weights_path = MODEL_DIR / "ensemble_best.safetensors"
+    # Fallback to root directory if user uploaded directly to root on HF Spaces
+    if not weights_path.exists() and (ROOT / "ensemble_best.safetensors").exists():
+        weights_path = ROOT / "ensemble_best.safetensors"
+
     config_path = MODEL_DIR / "model_config.yaml"
 
     if not weights_path.exists():
         logger.warning(f"Model weights not found at {weights_path}")
-        logger.warning("Place ensemble_best.safetensors in model_files/")
+        logger.warning("Place ensemble_best.safetensors in model_files/ or root dir")
         return False
 
     try:

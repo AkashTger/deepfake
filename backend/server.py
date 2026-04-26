@@ -590,13 +590,15 @@ if __name__ == "__main__":
     # Create assets dir if needed
     (FRONTEND_DIR / "assets").mkdir(parents=True, exist_ok=True)
 
+    port = int(os.environ.get("PORT", 7860))
+
     print("\n" + "=" * 55)
     print("  [DeepGuard AI] Deepfake Detection Server")
     print("=" * 55)
     print(f"  Device    : {device}")
     print(f"  Model dir : {MODEL_DIR}")
     print(f"  Frontend  : {FRONTEND_DIR}")
-    print(f"  URL       : http://localhost:8000")
+    print(f"  URL       : http://localhost:{port}")
     print("=" * 55 + "\n")
 
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=port)

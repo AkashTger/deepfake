@@ -1,0 +1,42 @@
+[
+  {
+    "path": "/kaggle/working/gradcam_samples/gradcam_00_label0.png",
+    "label": 0
+  },
+  {
+    "path": "/kaggle/working/gradcam_samples/gradcam_01_label0.png",
+    "label": 0
+  },
+  {
+    "path": "/kaggle/working/gradcam_samples/gradcam_02_label0.png",
+    "label": 0
+  },
+  {
+    "path": "/kaggle/working/gradcam_samples/gradcam_03_label0.png",
+    "label": 0
+  },
+  {
+    "path": "/kaggle/working/gradcam_samples/gradcam_04_label0.png",
+    "label": 0
+  },
+  {
+    "path": "/kaggle/working/gradcam_samples/gradcam_05_label1.png",
+    "label": 1
+  },
+  {
+    "path": "/kaggle/working/gradcam_samples/gradcam_06_label1.png",
+    "label": 1
+  },
+  {
+    "path": "/kaggle/working/gradcam_samples/gradcam_07_label1.png",
+    "label": 1
+  },
+  {
+    "path": "/kaggle/working/gradcam_samples/gradcam_08_label1.png",
+    "label": 1
+  },
+  {
+    "path": "/kaggle/working/gradcam_samples/gradcam_09_label1.png",
+    "label": 1
+  }
+]

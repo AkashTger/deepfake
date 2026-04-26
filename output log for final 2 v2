@@ -1,0 +1,108 @@
+final2.4
+
+Share
+
+Edit
+
+Download
+Logs
+
+Download Logs
+Successfully ran in 23962.8s
+Accelerator
+GPU T4 x2
+
+Environment
+Latest Container Image
+
+Output
+714.76 MB
+
+Time
+#
+Log Message
+7.5s	1	0.00s - Debugger warning: It seems that frozen modules are being used, which may
+7.5s	2	0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+7.5s	3	0.00s - to python to disable frozen modules.
+7.5s	4	0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+8.1s	5	0.00s - Debugger warning: It seems that frozen modules are being used, which may
+8.1s	6	0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+8.1s	7	0.00s - to python to disable frozen modules.
+8.1s	8	0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+9.3s	9	Copying NB1 output files:
+9.3s	10	  OK manifest.json  <-  /kaggle/input/datasets/assualttger/spd-processing2/manifest.json
+9.3s	11	  OK model_config.yaml  <-  /kaggle/input/datasets/assualttger/spd-processing2/model_config.yaml
+9.3s	12	model.py written (with Dropout 0.3 + DropPath 0.2)
+22.5s	13	Device : cuda
+22.5s	14	GPU    : Tesla T4
+22.5s	15	VRAM   : 15.6 GB
+22.6s	16	Train: 20,000 | Val: 2,500 | Celeb: 6,529
+22.6s	17	Batch=16 x 4 accum = 64 effective
+22.6s	18	LR=1e-05 | WD=0.01 | LabelSmooth=0.05
+22.6s	19	EarlyStopping patience=5 | Dropout=0.3 | DropPath=0.2
+22.6s	20	Path in manifest : /kaggle/input/datasets/assualttger/sdp-preprocessing/preprocessed/ff/rgb/Face2Face_083_213_002.npy
+22.8s	21	Exists now?      : True
+154.4s	22	Detected root    : /kaggle/input/datasets/assualttger/sdp-preprocessing/preprocessed
+171.6s	23	Valid train: 20,000 / 20,000
+189.2s	24	  Train: 20,000 samples
+191.3s	25	  Val: 2,500 samples
+196.8s	26	  Celeb: 6,529 samples
+196.8s	27	Train batches: 1250  |  Val batches: 157
+201.3s	28	Loading ConvNeXt-V2-Base + Swin-V2-Base (with Dropout)...
+212.1s	29	Parameters    : 174,588,668
+212.1s	30	VRAM (weights): 0.72 GB
+212.1s	31	
+212.1s	32	Smoke testing one batch...
+219.7s	33	Smoke test passed!  Peak VRAM: 2.05 GB
+219.7s	34	Metric helpers ready
+220.0s	35	Training 15 epochs | Early stopping patience=5
+220.0s	36	========================================================================
+220.0s	37	  Backbones FROZEN | trainable: 2,052
+678.4s	38	Saved -> /kaggle/working/ensemble_best.safetensors
+678.4s	39	Ep 01 | loss 0.7435->0.7143 (gap -0.029) | AUC 0.5514 | SN34 0.6578 | LR 5.50e-06 BEST
+1143.9s	40	Saved -> /kaggle/working/ensemble_best.safetensors
+1143.9s	41	Ep 02 | loss 0.6857->0.6327 (gap -0.053) | AUC 0.6069 | SN34 0.6839 | LR 1.00e-05 BEST
+1143.9s	42	  Backbones UNFROZEN | trainable: 174,588,668
+2899.2s	43	Saved -> /kaggle/working/ensemble_best.safetensors
+2899.2s	44	Ep 03 | loss 0.5236->0.3570 (gap -0.167) | AUC 0.8432 | SN34 0.8657 | LR 9.86e-06 BEST
+4642.1s	45	Saved -> /kaggle/working/ensemble_best.safetensors
+4642.1s	46	Ep 04 | loss 0.4418->0.3539 (gap -0.088) | AUC 0.8379 | SN34 0.8686 | LR 9.43e-06 BEST
+6383.0s	47	Saved -> /kaggle/working/ensemble_best.safetensors
+6383.0s	48	Ep 05 | loss 0.4156->0.3278 (gap -0.088) | AUC 0.8859 | SN34 0.8763 | LR 8.76e-06 BEST
+8121.9s	49	Ep 06 | loss 0.3916->0.3312 (gap -0.060) | AUC 0.9070 | SN34 0.8636 | LR 7.86e-06
+9860.9s	50	Saved -> /kaggle/working/ensemble_best.safetensors
+9860.9s	51	Ep 07 | loss 0.3709->0.3042 (gap -0.067) | AUC 0.9236 | SN34 0.8808 | LR 6.81e-06 BEST
+11601.2s	52	Saved -> /kaggle/working/ensemble_best.safetensors
+11601.2s	53	Ep 08 | loss 0.3524->0.2953 (gap -0.057) | AUC 0.9283 | SN34 0.8869 | LR 5.65e-06 BEST
+13337.9s	54	Ep 09 | loss 0.3424->0.3012 (gap -0.041) | AUC 0.9368 | SN34 0.8790 | LR 4.45e-06
+15072.1s	55	Ep 10 | loss 0.3317->0.2878 (gap -0.044) | AUC 0.9350 | SN34 0.8859 | LR 3.29e-06
+16812.2s	56	Saved -> /kaggle/working/ensemble_best.safetensors
+16812.2s	57	Ep 11 | loss 0.3251->0.2840 (gap -0.041) | AUC 0.9348 | SN34 0.8902 | LR 2.24e-06 BEST
+18549.7s	58	Ep 12 | loss 0.3210->0.3116 (gap -0.009) | AUC 0.9385 | SN34 0.8764 | LR 1.34e-06
+20283.8s	59	Ep 13 | loss 0.3142->0.3027 (gap -0.011) | AUC 0.9371 | SN34 0.8821 | LR 6.67e-07
+22020.9s	60	Ep 14 | loss 0.3119->0.3191 (gap 0.007) | AUC 0.9389 | SN34 0.8741 | LR 2.44e-07
+23760.3s	61	Ep 15 | loss 0.3132->0.3157 (gap 0.002) | AUC 0.9390 | SN34 0.8762 | LR 1.00e-07
+23760.3s	62	
+23760.3s	63	Best SN34 = 0.8902  (epoch 11)
+23764.3s	64	Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+23764.3s	65	
+23764.3s	66	Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+23764.9s	67	Loaded <- /kaggle/working/ensemble_best.safetensors
+23952.2s	68	Cross-Dataset: Celeb-DF v2 (unseen during training)
+23952.2s	69	  AUC  : 0.7570
+23952.2s	70	  SN34 : 0.6899
+23952.2s	71	  F1   : 0.6850
+23952.2s	72	
+23952.2s	73	model_summary.json saved
+23952.2s	74	Proceed to Notebook 3 for explainability.
+23958.0s	75	/usr/local/lib/python3.12/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\|'
+23958.0s	76	  cells[i][c] = re.sub('\\\\\|', '|', cell)
+23958.1s	77	/usr/local/lib/python3.12/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\_'
+23958.1s	78	  text = re.sub(r'_', '\_', text) # Escape underscores in display text
+23958.7s	79	[NbConvertApp] Converting notebook __notebook__.ipynb to notebook
+23959.1s	80	[NbConvertApp] Writing 410153 bytes to __notebook__.ipynb
+23961.3s	81	[NbConvertApp] Converting notebook __notebook__.ipynb to html
+23962.2s	82	[NbConvertApp] Support files will be in __results___files/
+23962.2s	83	[NbConvertApp] Making directory __results___files
+23962.2s	84	[NbConvertApp] Making directory __results___files
+23962.2s	85	[NbConvertApp] Writing 551231 bytes to __results__.html

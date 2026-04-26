@@ -1,0 +1,40 @@
+# ── Model weights (too large for git) ──
+model_files/ensemble_best.safetensors
+model_files/manifest.json
+
+# ── OpenCV DNN face detector (downloaded at runtime) ──
+backend/deploy.prototxt
+backend/res10_300x300_ssd_iter_140000.caffemodel
+
+# ── Python cache ──
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+
+# ── Virtual environments ──
+venv/
+.venv/
+env/
+
+# ── IDE / Editor ──
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ── OS files ──
+desktop.ini
+Thumbs.db
+.DS_Store
+
+# ── Jupyter checkpoints ──
+.ipynb_checkpoints/
+
+# ── Temporary uploads ──
+frontend/assets/uploads/

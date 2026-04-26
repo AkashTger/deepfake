@@ -1,0 +1,24 @@
+{
+  "architecture": "ConvNeXtV2-Base + SwinV2-Base Ensemble (v4 Anti-Overfit)",
+  "best_epoch": 11,
+  "hyperparameters": {
+    "lr": 1e-05,
+    "weight_decay": 0.01,
+    "batch_size": 16,
+    "img_size": 256,
+    "label_smoothing": 0.05,
+    "dropout": 0.3,
+    "drop_path": 0.2,
+    "patience": 5
+  },
+  "in_distribution": {
+    "sn34": 0.8902,
+    "auc": 0.9348,
+    "f1": 0.9115
+  },
+  "cross_dataset_celeb": {
+    "sn34": 0.6899,
+    "auc": 0.757,
+    "f1": 0.685
+  }
+}

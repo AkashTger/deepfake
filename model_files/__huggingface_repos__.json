@@ -1,0 +1,1 @@
+{"repos": [{"repoId": "timm/swinv2_base_window12to16_192to256.ms_in22k_ft_in1k", "repoType": "model", "commitHash": "57e3fd3cd45c37dca5c414f97cef29ca2134c221", "filePaths": ["model.safetensors"]}, {"repoId": "timm/convnextv2_base.fcmae_ft_in22k_in1k", "repoType": "model", "commitHash": "9e250ed8f88b436472d2b24af26f82a8aa8c719d", "filePaths": ["model.safetensors"]}]}

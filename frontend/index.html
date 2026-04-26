@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>DeepGuard AI — SOTA Deepfake Detection</title>
+  <meta name="description"
+    content="SOTA Explainable Deepfake Detection using ConvNeXt-V2 + Swin-V2 Ensemble with Grad-CAM, ELA, and FFT analysis." />
+  <link rel="stylesheet" href="./css/style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+</head>
+
+<body>
+
+  <!-- SCAN LINE OVERLAY -->
+  <div class="scanlines"></div>
+
+  <!-- ═══ SIDEBAR ═══ -->
+  <aside id="sidebar">
+    <div class="sidebar-top">
+      <a href="#" class="logo" onclick="navigateTo('detect');return false;">
+        <span class="logo-text">DeepGuard<span class="logo-accent">AI</span></span>
+      </a>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="#" class="sidebar-link active" data-page="detect" onclick="navigateTo('detect');return false;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+          <path
+            d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+        </svg>
+        <span>Detect</span>
+      </a>
+      <a href="#" class="sidebar-link" data-page="research" onclick="navigateTo('research');return false;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path
+            d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+        </svg>
+        <span>Research</span>
+      </a>
+    </nav>
+    <div class="sidebar-bottom">
+      <div id="status-badge" class="status-badge status-loading">
+        <span class="status-dot"></span>
+        <span class="status-text">Connecting...</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ═══ MAIN ═══ -->
+  <main id="main-content">
+
+    <!-- PAGE 1: DETECT -->
+    <div class="page active" id="page-detect">
+
+      <!-- Hero -->
+      <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="particles">
+          <div class="particle p1"></div>
+          <div class="particle p2"></div>
+          <div class="particle p3"></div>
+          <div class="particle p4"></div>
+          <div class="particle p5"></div>
+          <div class="particle p6"></div>
+        </div>
+        <div class="hero-split">
+          <div class="hero-left fade-up visible">
+            <div class="hero-badge"><span class="pulse-dot"></span> Live Detection System · v4.0</div>
+            <h1>Detecting <em>Deepfakes</em><br>at the Pixel Level</h1>
+            <p class="hero-sub">A state-of-the-art ensemble of ConvNeXt-V2 and Swin-V2 transformers with Focal Loss,
+              stochastic depth, and full Grad-CAM, ELA &amp; FFT explainability.</p>
+            <div class="hero-cta-row">
+              <a href="#" class="btn btn-primary"
+                onclick="document.querySelector('.detect-section').scrollIntoView({behavior:'smooth'});return false;">⚡
+                Start Scanning</a>
+              <a href="#" class="btn btn-outline" onclick="navigateTo('research');return false;">📊 View Research</a>
+            </div>
+            <div class="hero-stats-grid">
+              <div class="stat">
+                <div class="stat-val blue">93.5%</div>
+                <div class="stat-label">Val AUC</div>
+              </div>
+              <div class="stat">
+                <div class="stat-val green">89.0%</div>
+                <div class="stat-label">SN34 Score</div>
+              </div>
+              <div class="stat">
+                <div class="stat-val amber">91.2%</div>
+                <div class="stat-label">F1 Score</div>
+              </div>
+              <div class="stat">
+                <div class="stat-val blue">&lt;2s</div>
+                <div class="stat-label">Inference</div>
+              </div>
+            </div>
+          </div>
+          <div class="hero-right fade-up visible">
+            <div class="hero-img-glow"></div>
+            <img src="./assets/deepfake.png" alt="DeepGuard AI — Deepfake forensic analysis" class="hero-side-img" />
+          </div>
+        </div>
+      </section>
+
+      <div class="glow-line"></div>
+
+      <!-- Upload & Analyze -->
+      <section class="detect-section">
+        <div class="container">
+          <div class="fade-up">
+            <div class="section-label">Analyzer</div>
+            <h2 class="section-title">Upload Image or Video</h2>
+            <p class="section-sub">Drag & drop a face image or video — our dual-backbone ensemble analyzes it and
+              explains exactly why it decided.</p>
+          </div>
+
+          <div class="analyzer-grid fade-up">
+            <!-- Upload Panel -->
+            <div class="card upload-card" id="upload-card">
+              <div class="upload-zone" id="upload-zone">
+                <div class="upload-icon-wrap">
+                  <svg width="40" height="40" viewBox="0 0 48 48" fill="none">
+                    <path d="M24 32V16M16 22l8-8 8 8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                      stroke-linejoin="round" />
+                    <path d="M40 30v6a4 4 0 01-4 4H12a4 4 0 01-4-4v-6" stroke="currentColor" stroke-width="2.5"
+                      stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </div>
+                <p class="upload-text">Drop an image or video here, or <span class="upload-browse">browse</span></p>
+                <p class="upload-hint">JPG, PNG, WEBP, MP4, AVI, MOV • Images 10MB · Videos 50MB</p>
+                <input type="file" id="file-input" accept="image/*,video/*" hidden />
+              </div>
+              <!-- Preview -->
+              <div class="preview-container" id="preview-container" style="display:none">
+                <img id="preview-image" alt="Preview" style="display:none" />
+                <video id="preview-video" controls muted style="display:none"></video>
+                <button id="clear-btn" class="btn-icon" title="Clear">✕</button>
+              </div>
+              <button id="analyze-btn" class="btn btn-primary" disabled>
+                <span class="btn-text">Analyze</span>
+                <span class="btn-loader" style="display:none"></span>
+              </button>
+            </div>
+
+            <!-- Results Panel -->
+            <div class="card results-card" id="results-card" style="display:none">
+              <div id="verdict-banner" class="verdict-banner">
+                <div class="verdict-icon" id="verdict-icon"></div>
+                <div class="verdict-info">
+                  <span class="verdict-label" id="verdict-label">REAL</span>
+                  <span class="verdict-confidence" id="verdict-confidence">98.5% confidence</span>
+                </div>
+              </div>
+              <div id="fix-banner" class="fix-banner" style="display:none">
+                <span class="fix-icon">🔧</span>
+                <span class="fix-text">GAN fix applied — branches disagreed by <span
+                    id="fix-disagreement">52</span>%</span>
+              </div>
+              <div class="branches">
+                <h3>Branch Analysis</h3>
+                <div class="branch-row">
+                  <div class="branch-info"><span class="branch-name">ConvNeXt-V2</span><span class="branch-desc">Local
+                      pixel artifacts</span></div>
+                  <div class="branch-bar-wrap">
+                    <div class="branch-bar branch-bar-cnn" id="cnn-bar" style="width:0%"></div>
+                  </div>
+                  <span class="branch-value" id="cnn-value">0%</span>
+                </div>
+                <div class="branch-row">
+                  <div class="branch-info"><span class="branch-name">Swin-V2</span><span class="branch-desc">Global
+                      inconsistencies</span></div>
+                  <div class="branch-bar-wrap">
+                    <div class="branch-bar branch-bar-vit" id="vit-bar" style="width:0%"></div>
+                  </div>
+                  <span class="branch-value" id="vit-value">0%</span>
+                </div>
+                <div class="branch-row ensemble-row">
+                  <div class="branch-info"><span class="branch-name">Ensemble</span><span class="branch-desc"
+                      id="ensemble-strategy">Average</span></div>
+                  <div class="branch-bar-wrap">
+                    <div class="branch-bar branch-bar-ensemble" id="ensemble-bar" style="width:0%"></div>
+                  </div>
+                  <span class="branch-value" id="ensemble-value">0%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Video Frame Results -->
+          <div class="video-results" id="video-results" style="display:none">
+            <div class="fade-up">
+              <div class="section-label" style="margin-top:2rem">Frame-by-Frame Analysis</div>
+            </div>
+            <div class="video-summary card" id="video-summary"></div>
+            <div class="video-frames" id="video-frames"></div>
+          </div>
+
+          <!-- Explainability Panel -->
+          <div class="explain-grid" id="explain-grid" style="display:none">
+            <div class="card explain-card">
+              <h3>🔍 Face Crop</h3>
+              <p class="explain-desc">Detected and cropped face region</p>
+              <div class="explain-img-wrap"><img id="face-crop-img" alt="Face crop" /></div>
+            </div>
+            <div class="card explain-card">
+              <h3>🌡️ Grad-CAM</h3>
+              <p class="explain-desc">Where ConvNeXt focused its attention</p>
+              <div class="explain-img-wrap"><img id="gradcam-img" alt="Grad-CAM" /></div>
+            </div>
+            <div class="card explain-card">
+              <h3>⚡ Error Level Analysis</h3>
+              <p class="explain-desc">Compression inconsistencies reveal edits</p>
+              <div class="explain-img-wrap"><img id="ela-img" alt="ELA" /></div>
+            </div>
+            <div class="card explain-card">
+              <h3>📊 FFT Spectrum</h3>
+              <p class="explain-desc">Frequency patterns — GAN artifacts show grids</p>
+              <div class="explain-img-wrap"><img id="fft-img" alt="FFT" /></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- PAGE 2: RESEARCH -->
+    <div class="page" id="page-research">
+
+      <!-- Architecture -->
+      <section class="research-section">
+        <div class="container">
+          <div class="fade-up">
+            <div class="section-label">Architecture</div>
+            <h2 class="section-title">Dual-Branch Ensemble</h2>
+            <p class="section-sub">Two complementary vision backbones, each specialized for different manipulation
+              signals, merged via learnable Platt scaling.</p>
+          </div>
+          <div class="arch-grid fade-up">
+            <div class="arch-card cnn">
+              <div class="arch-icon-label">CNN BRANCH</div>
+              <div class="arch-name">ConvNeXt-V2-Base</div>
+              <div class="arch-desc">Detects local pixel-level artifacts — JPEG blocking, blending seams, texture
+                discontinuities, and compression anomalies introduced during face-swap synthesis.</div>
+              <div class="arch-tags"><span class="arch-tag">87.8M params</span><span
+                  class="arch-tag">drop_path=0.2</span><span class="arch-tag">dropout=0.3</span></div>
+            </div>
+            <div class="arch-card vit">
+              <div class="arch-icon-label">TRANSFORMER BRANCH</div>
+              <div class="arch-name">Swin-V2-Base</div>
+              <div class="arch-desc">Captures global lighting inconsistencies, shadow directionality mismatches, and
+                high-level semantic coherence failures across the full face region.</div>
+              <div class="arch-tags"><span class="arch-tag green">87.9M params</span><span
+                  class="arch-tag green">shifted windows</span><span class="arch-tag green">256×256 input</span></div>
+            </div>
+            <div class="arch-card ensemble">
+              <div class="arch-icon-label">FUSION</div>
+              <div class="arch-name">Temperature-Scaled Ensemble</div>
+              <div class="arch-desc">Soft-voting with learnable per-branch temperature parameters (Platt scaling). Each
+                branch's confidence is calibrated independently before averaging.</div>
+              <div class="arch-tags"><span class="arch-tag amber">T_cnn · T_vit learned</span><span
+                  class="arch-tag amber">disagreement-aware</span></div>
+            </div>
+            <div class="arch-card loss">
+              <div class="arch-icon-label">TRAINING</div>
+              <div class="arch-name">Focal Loss + Stochastic Depth</div>
+              <div class="arch-desc">Focal Loss (α=0.25, γ=2.0) concentrates gradient on hard samples. DropPath=0.2
+                randomly disables 20% of depth blocks, forcing diverse feature pathways.</div>
+              <div class="arch-tags"><span class="arch-tag red">α=0.25 γ=2.0</span><span class="arch-tag red">eff.
+                  batch=64</span></div>
+            </div>
+          </div>
+
+          <!-- Pipeline -->
+          <div class="fade-up" style="margin-top:2.5rem">
+            <div class="section-label">Inference Pipeline</div>
+            <div class="pipeline">
+              <div class="pipe-step">
+                <div class="pipe-num">Input</div>
+                <div class="pipe-name">Face Crop</div>
+                <div class="pipe-sub">256×256 RGB</div>
+              </div>
+              <div class="pipe-arrow">→</div>
+              <div class="pipe-step">
+                <div class="pipe-num">Augment</div>
+                <div class="pipe-name">Normalize</div>
+                <div class="pipe-sub">ImageNet stats</div>
+              </div>
+              <div class="pipe-arrow">→</div>
+              <div class="pipe-step">
+                <div class="pipe-num">Branch 1</div>
+                <div class="pipe-name">ConvNeXt-V2</div>
+                <div class="pipe-sub">local features</div>
+              </div>
+              <div class="pipe-arrow">→</div>
+              <div class="pipe-step">
+                <div class="pipe-num">Branch 2</div>
+                <div class="pipe-name">Swin-V2</div>
+                <div class="pipe-sub">global context</div>
+              </div>
+              <div class="pipe-arrow">→</div>
+              <div class="pipe-step">
+                <div class="pipe-num">Fusion</div>
+                <div class="pipe-name">Ensemble</div>
+                <div class="pipe-sub">Platt scaling</div>
+              </div>
+              <div class="pipe-arrow">→</div>
+              <div class="pipe-step output">
+                <div class="pipe-num" style="color:var(--green)">Output</div>
+                <div class="pipe-name">P(Fake)</div>
+                <div class="pipe-sub">0.0 – 1.0</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <hr class="divider" />
+
+      <!-- Performance Metrics -->
+      <section class="research-section">
+        <div class="container">
+          <div class="fade-up">
+            <div class="section-label">Performance</div>
+            <h2 class="section-title">In-Distribution Metrics</h2>
+            <p class="section-sub">Evaluated on held-out validation split from FF++ C23 and 140K Real & Fake Faces
+              datasets.</p>
+          </div>
+          <div class="metrics-row fade-up">
+            <div class="metric-cell">
+              <div class="metric-val blue" id="m-auc">0.935</div>
+              <div class="metric-label">ROC AUC</div>
+            </div>
+            <div class="metric-cell">
+              <div class="metric-val green" id="m-sn34">0.890</div>
+              <div class="metric-label">SN34 Score</div>
+            </div>
+            <div class="metric-cell">
+              <div class="metric-val amber" id="m-f1">0.912</div>
+              <div class="metric-label">F1 Score</div>
+            </div>
+            <div class="metric-cell">
+              <div class="metric-val" id="m-device">—</div>
+              <div class="metric-label">Device</div>
+            </div>
+          </div>
+
+          <div class="charts-grid fade-up">
+            <div class="chart-card">
+              <div class="chart-title">Training Loss (Train vs Val)</div>
+              <div class="chart-wrap"><canvas id="lossChart"></canvas></div>
+            </div>
+            <div class="chart-card">
+              <div class="chart-title">Validation AUC Over Epochs</div>
+              <div class="chart-wrap"><canvas id="aucChart"></canvas></div>
+            </div>
+          </div>
+          <div class="charts-grid fade-up" style="margin-top:1.5rem">
+            <div class="chart-card">
+              <div class="chart-title">SN34 Score Over Epochs</div>
+              <div class="chart-wrap"><canvas id="sn34Chart"></canvas></div>
+            </div>
+            <div class="chart-card">
+              <div class="chart-title">Hyperparameter Summary</div>
+              <table class="hyperparam-table">
+                <tr>
+                  <td>Learning Rate</td>
+                  <td class="val blue">1e-5</td>
+                </tr>
+                <tr>
+                  <td>Weight Decay</td>
+                  <td class="val blue">1e-2</td>
+                </tr>
+                <tr>
+                  <td>Effective Batch</td>
+                  <td class="val blue">64 (16×4 accum)</td>
+                </tr>
+                <tr>
+                  <td>LR Schedule</td>
+                  <td class="val green">Cosine + Linear Warmup</td>
+                </tr>
+                <tr>
+                  <td>Label Smoothing</td>
+                  <td class="val amber">0.05</td>
+                </tr>
+                <tr>
+                  <td>Dropout / DropPath</td>
+                  <td class="val amber">0.3 / 0.2</td>
+                </tr>
+                <tr>
+                  <td>Image Size</td>
+                  <td class="val">256×256</td>
+                </tr>
+                <tr>
+                  <td>Optimizer</td>
+                  <td class="val">AdamW</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <hr class="divider" />
+
+      <!-- Explainability -->
+      <section class="research-section">
+        <div class="container">
+          <div class="fade-up">
+            <div class="section-label">Explainability</div>
+            <h2 class="section-title">Why Did It Decide That?</h2>
+            <p class="section-sub">Three complementary visual explanation methods reveal which image features drove the
+              fake/real decision.</p>
+          </div>
+          <div class="xai-grid fade-up">
+            <div class="xai-card">
+              <div class="xai-icon gc"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#42a5f5"
+                  stroke-width="1.5">
+                  <circle cx="12" cy="12" r="3" />
+                  <path
+                    d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83" />
+                </svg></div>
+              <div class="xai-name">Grad-CAM Heatmaps</div>
+              <div class="xai-desc">Gradient-weighted class activation maps highlight which facial regions the
+                ConvNeXt-V2 backbone found most discriminative. Red = high attention.</div>
+              <span class="xai-badge blue">ConvNeXt Stage 3</span>
+            </div>
+            <div class="xai-card">
+              <div class="xai-icon ela"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#e63946"
+                  stroke-width="1.5">
+                  <rect x="3" y="3" width="18" height="18" rx="2" />
+                  <path d="M3 9h18M3 15h18M9 3v18M15 3v18" />
+                </svg></div>
+              <div class="xai-name">Error Level Analysis</div>
+              <div class="xai-desc">Re-saves at JPEG quality 90 and amplifies differences. Manipulation introduces
+                regions with inconsistent compression artifacts.</div>
+              <span class="xai-badge red">JPEG quality=90</span>
+            </div>
+            <div class="xai-card">
+              <div class="xai-icon fft"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#00e676"
+                  stroke-width="1.5">
+                  <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+                </svg></div>
+              <div class="xai-name">FFT Frequency Spectrum</div>
+              <div class="xai-desc">Log-magnitude 2D FFT reveals frequency fingerprints. AI-generated faces exhibit
+                regular grid artifacts from GAN upsampling patterns.</div>
+              <span class="xai-badge green">2D DFT log-mag</span>
+            </div>
+          </div>
+
+          <!-- Signal cards -->
+          <div class="signal-grid fade-up">
+            <div class="signal-card">
+              <div class="signal-label blue">Real Face — Grad-CAM</div>
+              <p>Diffuse, low-intensity activation distributed across the face. The model finds no concentrated
+                manipulation region.</p>
+            </div>
+            <div class="signal-card">
+              <div class="signal-label red">Fake Face — Grad-CAM</div>
+              <p>Concentrated hot spots at eye corners, jaw boundary, and ear-hair transitions — where compositing
+                introduces blending seams.</p>
+            </div>
+            <div class="signal-card">
+              <div class="signal-label green">Fake Face — FFT</div>
+              <p>Regular cross-shaped frequency artifacts centered at DC component. Periodic peaks from GAN decoder
+                upsampling are absent in real photographs.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <hr class="divider" />
+
+      <!-- Cross-Dataset Benchmark -->
+      <section class="research-section">
+        <div class="container">
+          <div class="fade-up">
+            <div class="section-label">Cross-Dataset Benchmark</div>
+            <h2 class="section-title">Generalisation to Unseen Data</h2>
+            <p class="section-sub">Celeb-DF v2 was never seen during training — testing whether the model learned
+              generic manipulation signals.</p>
+          </div>
+          <div class="bench-grid fade-up">
+            <div class="bench-table">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Dataset</th>
+                    <th>AUC</th>
+                    <th>SN34</th>
+                    <th>F1</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>FF++ C23 (Val)</td>
+                    <td><span class="highlight blue">0.935</span></td>
+                    <td><span class="highlight blue">0.890</span></td>
+                    <td><span class="highlight blue">0.912</span></td>
+                  </tr>
+                  <tr>
+                    <td>Celeb-DF v2 <span class="unseen">(unseen)</span></td>
+                    <td><span class="highlight green">0.757</span></td>
+                    <td><span class="highlight green">0.690</span></td>
+                    <td><span class="highlight green">0.685</span></td>
+                  </tr>
+                  <tr>
+                    <td class="muted">Drop</td>
+                    <td><span class="amber mono">−19.0%</span></td>
+                    <td><span class="amber mono">−22.5%</span></td>
+                    <td><span class="amber mono">−24.9%</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="bench-note">
+              <div class="bench-note-title">Generalisation Analysis</div>
+              <p>The cross-dataset drop is expected — Celeb-DF v2 uses different compression, actors, and lighting. The
+                v4 anti-overfit techniques (dropout, label smoothing, augmentation) ensure the model learns genuine
+                manipulation signals rather than dataset-specific shortcuts.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <hr class="divider" />
+
+      <!-- Datasets Used -->
+      <section class="research-section">
+        <div class="container">
+          <div class="fade-up">
+            <div class="section-label">Training Data</div>
+            <h2 class="section-title">Datasets Used</h2>
+          </div>
+          <div class="dataset-list fade-up">
+            <div class="ds-card">
+              <div class="ds-title">FaceForensics++ C23</div>
+              <div class="ds-meta">~1,000 videos · 4 manipulation methods</div>
+              <div class="ds-desc">Primary benchmark with Deepfakes, Face2Face, FaceSwap, and NeuralTextures at light
+                (C23) compression.</div>
+            </div>
+            <div class="ds-card">
+              <div class="ds-title">140K Real & Fake Faces</div>
+              <div class="ds-meta">140,000 images · StyleGAN2</div>
+              <div class="ds-desc">70K real faces from Flickr-Faces-HQ and 70K AI-generated faces from StyleGAN2 —
+                excellent class balance.</div>
+            </div>
+            <div class="ds-card">
+              <div class="ds-title">Celeb-DF v2 (Test Only)</div>
+              <div class="ds-meta">590 real + 5,639 fake videos</div>
+              <div class="ds-desc">High-quality celebrity deepfakes used exclusively for cross-dataset generalisation
+                testing — zero training exposure.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <div class="glow-line"></div>
+  <footer>
+    <div class="footer-logo">DeepGuard<span class="accent">AI</span></div>
+    <div class="footer-sub">ConvNeXt-V2 + Swin-V2 Ensemble · Anti-Overfit v4 · Grad-CAM · ELA · FFT</div>
+    <div class="footer-tags">
+      <span class="tag">pytorch</span><span class="tag">timm</span><span class="tag">safetensors</span>
+      <span class="tag">torchcam</span><span class="tag">kaggle t4 gpu</span>
+      <span class="tag">FaceForensics++</span><span class="tag">Celeb-DF v2</span><span class="tag">SN34</span>
+    </div>
+  </footer>
+
+  <script src="./js/app.js"></script>
+</body>
+
+</html>

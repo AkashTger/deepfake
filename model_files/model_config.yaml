@@ -1,0 +1,19 @@
+data:
+  image_size: 224
+  manifest_path: /kaggle/working/manifest.json
+  num_workers: 4
+explainability:
+  ela_quality: 90
+  fft_shift: true
+  gradcam_layer: stages.3.blocks.2
+model:
+  ensemble:
+    cnn_branch: convnextv2_base
+    vit_branch: swinv2_base_window12to16_192to256
+  num_classes: 1
+  pretrained: true
+training:
+  batch_size: 64
+  epochs: 20
+  learning_rate: 0.0001
+  warmup_epochs: 2

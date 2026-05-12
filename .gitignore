@@ -38,3 +38,6 @@ Thumbs.db
 
 # ── Temporary uploads ──
 frontend/assets/uploads/
+
+# -- Extra files (docs, experiments, etc.) --
+docs_and_experiments/

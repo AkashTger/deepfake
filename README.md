@@ -5,8 +5,15 @@ A state-of-the-art deepfake face detection web application using a dual-backbone
 ![Python](https://img.shields.io/badge/Python-3.10+-blue)
 ![PyTorch](https://img.shields.io/badge/PyTorch-2.0+-red)
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.115-green)
+[![Hugging Face Spaces](https://img.shields.io/badge/🤗%20Hugging%20Face-Live%20Demo-yellow.svg)](https://huggingface.co/spaces/DiddiAkash/deepfake-application)
 
 ---
+
+## 🌐 Live Demo
+
+The application is hosted and running live on Hugging Face Spaces!
+👉 **[Try the Deepfake Application Here](https://huggingface.co/spaces/DiddiAkash/deepfake-application)**
+
 
 ## ✨ Features
 
@@ -83,7 +90,7 @@ main/
 │   ├── training_history.json      # 20-epoch training log
 │   ├── web_app_bundle.json        # Dashboard data bundle
 │   └── model.py                   # Training-time model definition
-└── *.ipynb                      # Kaggle training notebooks (NB1-NB3)
+└── docs_and_experiments/          # Training notebooks, logs, and experiment docs
 ```
 
 ## 🔧 API Endpoints
